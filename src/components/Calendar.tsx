@@ -15,19 +15,21 @@ const events: TEvent[] = eventData["data"]["events"] as TEvent[]
 
 const CalendarWrapper = styled.div`
     display: grid;
-    grid-template-columns: repeat(${endHour - startHour + 1}, 1fr);
+    grid-template-columns: repeat(${(endHour - startHour + 1) * 2}, 1fr);
     width: max-content;
+    height: 100%;
     margin: auto;
 `
 
 const Divider = styled.span`
     border-left: 1px solid lightgrey;
     grid-row: 1 / span 5;
-    grid-column: ${(props: { column: number} ) => props.column}
+    grid-column: ${(props: { column: number} ) => props.column};
 `
 
 const Heading = styled.span`
-    grid-column: ${(props: { column: number} ) => props.column}
+    grid-column: ${(props: { column: number} ) => props.column};
+    grid-row: 1;
 `
 
 interface EventProps {
@@ -64,7 +66,7 @@ const Calendar: React.FC = (props: Props) => {
             <Event 
                 column={timestampToCol(event.start_time)}
                 span={timestampToCol(event.end_time) - timestampToCol(event.start_time) + 1}
-                row={event.row}>{event.name}</Event>
+                row={event.row + 1}>{event.name}</Event>
         )
 
     return (
