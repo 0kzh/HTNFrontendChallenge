@@ -16,14 +16,16 @@ const events: TEvent[] = eventData["data"]["events"] as TEvent[]
 const CalendarWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(${(endHour - startHour + 1) * 2}, 1fr);
+    grid-row-gap: 1em;
     width: max-content;
+    overflow-y: hidden;
     height: 100%;
     margin: auto;
 `
 
 const Divider = styled.span`
     border-left: 1px solid lightgrey;
-    grid-row: 1 / span 5;
+    grid-row: 1 / span 100;
     grid-column: ${(props: { column: number} ) => props.column};
 `
 
@@ -70,7 +72,7 @@ const Calendar: React.FC = (props: Props) => {
         )
 
     return (
-        <div style={{ overflow: 'scroll' }}>
+        <div style={{ overflow: 'scroll', flex: 1 }}>
             <CalendarWrapper>
                 {renderDividers()}
                 {renderHeadings()}
