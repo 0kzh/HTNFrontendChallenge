@@ -35,6 +35,11 @@ export const timestampToCol = (timeInMillis: number): number => {
     return date.hour() * 2 + (date.minute() == 30 ? 1 : 0) + 1
 }
 
+export const formatTimestamp = (timeInMillis: number): string => {
+    const date: moment.Moment = moment(timeInMillis)
+    return date.format("h:mm A")
+}
+
 export const sameDate = (moment1: moment.Moment, moment2: moment.Moment): boolean => {
     return moment1.startOf('day').isSame(moment2.startOf('day'))
 }

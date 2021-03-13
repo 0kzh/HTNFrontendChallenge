@@ -8,3 +8,9 @@ export const eventTimelines = {
         "end_time": 1638431999
     }
 }
+
+export const eventColors = {
+    "workshop": "#33B1F3", 
+    "activity": "#F4841F",
+    "tech_talk": "#6F6BF6"
+}

@@ -10,7 +10,7 @@ type TSpeaker = {
 export type TEvent = {
   id: number;
   name: string;
-  event_type: string;
+  event_type: TEventType;
   permission?: TPermission;
 
   start_time: number; // unix timestamp (ms)
