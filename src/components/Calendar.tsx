@@ -42,6 +42,7 @@ interface EventProps {
 
 const Event = styled.div`
     color: white;
+    padding: 5px 8px;
     background: #b03532;
     border-radius: 5px;
     grid-row: ${(p: EventProps ) => p.row};
