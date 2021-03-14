@@ -27,7 +27,7 @@ const ButtonWrapper = styled.button`
     border-radius: 6px;
     outline: none;
     padding: 6px 12px;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 14px;
     line-height: 20px;
     white-space: nowrap;

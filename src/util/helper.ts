@@ -40,6 +40,11 @@ export const formatTimestamp = (timeInMillis: number): string => {
     return date.format("h:mm A")
 }
 
+export const getDate = (timeInMillis: number): string => {
+    const date: moment.Moment = moment(timeInMillis)
+    return date.format("dddd, MMM DD")
+}
+
 export const sameDate = (moment1: moment.Moment, moment2: moment.Moment): boolean => {
     return moment1.startOf('day').isSame(moment2.startOf('day'))
 }

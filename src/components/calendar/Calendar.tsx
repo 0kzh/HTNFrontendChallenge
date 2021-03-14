@@ -4,8 +4,8 @@ import { range, convert24HTo12H, timestampToCol, sameDate, isLoggedIn } from '..
 import eventData from "../../assets/data.json"
 import { TEvent, TEventType } from '../../util/types'
 import Event from './Event'
+import EventModal from './EventModal'
 import moment from 'moment';
-
 interface Props {
     curDay: moment.Moment
     filter: TEventType | null
@@ -19,6 +19,9 @@ const events: TEvent[] = eventData["data"]["events"] as TEvent[]
 
 const Calendar: React.FC<Props> = (props) => {
     const { curDay, filter } = props
+
+    const [modalIsOpen, setModalIsOpen] = useState<boolean>(true)
+    const [selectedEvent, setSelectedEvent] = useState<TEvent>()
 
     const renderDividers = () => 
         hours.map((hour, i) => 
@@ -45,8 +48,11 @@ const Calendar: React.FC<Props> = (props) => {
                 span={timestampToCol(event.end_time) - timestampToCol(event.start_time)}
                 row={event.row + 1}
                 event={event}
+                onClick={() => setSelectedEvent(event)}
             />
         )
+    
+    const closeModal = () => setSelectedEvent(undefined)
 
     return (
         curDay ?
@@ -56,6 +62,7 @@ const Calendar: React.FC<Props> = (props) => {
                 {renderHeadings()}
                 {renderEvents()}
             </CalendarWrapper>
+            <EventModal eventData={selectedEvent} closeModalHandler={closeModal} />
         </div>
         : null
     )

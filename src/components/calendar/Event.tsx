@@ -9,10 +9,9 @@ interface EventProps {
     column: number;
     span: number;
     event: TEvent;
-    children?: React.ReactNode
 }
 
-const Event: React.FC<EventProps> = (props) => {
+const Event: React.FC<EventProps & React.HTMLAttributes<HTMLDivElement>> = (props) => {
     const { event } = props
 
     return (
@@ -25,6 +24,7 @@ const Event: React.FC<EventProps> = (props) => {
 
 const Wrapper = styled.div`
     color: white;
+    cursor: pointer;
     padding: 5px 8px;
     margin: 0 3px;
     background: ${(p: EventProps) => eventColors[p.event.event_type]};
