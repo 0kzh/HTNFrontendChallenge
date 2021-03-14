@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { range, convert24HTo12H, timestampToCol, sameDate } from '../../util/helper'
 import eventData from "../../assets/data.json"
-import { TEvent } from '../../util/types'
+import { TEvent, TEventType } from '../../util/types'
 import Event from './Event'
 import moment from 'moment';
 
 interface Props {
     curDay: moment.Moment
+    filter: TEventType | null
 }
 const startHour = 0
 const endHour = 23
@@ -17,7 +18,7 @@ const hours = range(startHour, endHour)
 const events: TEvent[] = eventData["data"]["events"] as TEvent[]
 
 const Calendar: React.FC<Props> = (props) => {
-    const { curDay } = props
+    const { curDay, filter } = props
 
     const renderDividers = () => 
         hours.map((hour, i) => 
@@ -34,7 +35,10 @@ const Calendar: React.FC<Props> = (props) => {
         )
 
     const renderEvents = () => 
-        events.filter((e: TEvent) => sameDate(curDay, moment(e.start_time))).map((event: TEvent, i) =>
+        events
+        .filter((e: TEvent) => !filter || e.event_type == filter)
+        .filter((e: TEvent) => sameDate(curDay, moment(e.start_time)))
+        .map((event: TEvent, i) =>
             <Event 
                 column={timestampToCol(event.start_time)}
                 span={timestampToCol(event.end_time) - timestampToCol(event.start_time)}

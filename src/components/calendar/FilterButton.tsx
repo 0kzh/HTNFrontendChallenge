@@ -7,11 +7,11 @@ interface Props {
     isSelected: boolean;
 }
 
-function FilterButton(props: Props) {
-    const { color, text, isSelected } = props
+const FilterButton: React.FC<Props & React.HTMLAttributes<HTMLDivElement>> = (props) => {
+    const { color, text, isSelected, onClick } = props
 
     return (
-        <RoundButton isSelected={isSelected}>
+        <RoundButton {...props}>
             <Indicator color={color} />
             {text} 
         </RoundButton>
@@ -19,10 +19,19 @@ function FilterButton(props: Props) {
 }
 
 const RoundButton = styled.div`
-    background: ${(p: {isSelected: boolean}) => p.isSelected ? "#48484A" : "white"};
+    font-size: 12px;
+    background: ${(p: {isSelected: boolean}) => p.isSelected ? "#CEEEFC" : "white"};
+    border: 1px solid #eef2f2;
+    border-radius: 50px;
+    padding: 5px 10px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
     
     &:hover{
-        background: #48484A;
+        background: #CEEEFC;
     }
 `
 
@@ -30,8 +39,9 @@ const Indicator = styled.div`
     height: 8px;
     width: 8px;
     border-radius: 50%;
-    color: ${(p: {color: string}) => p.color};
-    margin-right: 5px;
+    background: ${(p: {color: string}) => p.color};
+    margin-right: 6px;
+    margin-top: 1px;
 `
 
 export default FilterButton

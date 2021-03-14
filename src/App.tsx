@@ -3,33 +3,59 @@ import styled from 'styled-components';
 import { ChevronLeft, ChevronRight } from 'heroicons-react';
 
 import Calendar from './components/calendar/Calendar'
-import { FlexRow } from './components/common/FlexLayout'
+import FilterButton from './components/calendar/FilterButton'
+import { FlexRow  } from './components/common/FlexLayout'
+import { eventColors } from './util/constants'
+import { TEventType } from './util/types'
 
 import './App.css'
 import moment from 'moment';
 
 const App: React.FC = () => {
-  const [curDay, setCurDay] = useState(moment(1610438400000))  
+  const [curDay, setCurDay] = useState(moment(1610438400000))
+  const [filter, setFilter] = useState<TEventType | null>(null)
 
   useEffect(() => {
-    console.log(curDay)
-  }, [curDay])
+    console.log(filter)
+  }, [filter])
 
   return (
     <div className="App">
       <div>
         <h1>Event Calendar</h1>
-        <FlexRow style={{ gap: 10, marginBottom: 30 }}>
-          <RoundButton onClick={() => setCurDay(curDay.clone().subtract(1, 'd'))}>
-            <ChevronLeft/>
-          </RoundButton>
-          <Date>{curDay.format("dddd, MMM DD")}</Date>
-          <RoundButton onClick={() => setCurDay(curDay.clone().add(1, 'd'))}>
-            <ChevronRight/>
-          </RoundButton>
+        <FlexRow style={{ justifyContent: 'space-between', marginBottom: 30 }}>
+          <FlexRow style={{ gap: 10 }}>
+            <RoundButton onClick={() => setCurDay(curDay.clone().subtract(1, 'd'))}>
+              <ChevronLeft/>
+            </RoundButton>
+            <Date>{curDay.format("dddd, MMM DD")}</Date>
+            <RoundButton onClick={() => setCurDay(curDay.clone().add(1, 'd'))}>
+              <ChevronRight/>
+            </RoundButton>
+          </FlexRow>
+          <FlexRow>
+            <FilterButton
+              color={eventColors["workshop"]} 
+              text="Workshop" 
+              isSelected={filter === "workshop"} 
+              onClick={() => filter === "workshop" ? setFilter(null) : setFilter("workshop")}
+            />
+            <FilterButton
+              color={eventColors["activity"]} 
+              text="Activity" 
+              isSelected={filter === "activity"} 
+              onClick={() => filter === "activity" ? setFilter(null) : setFilter("activity")}
+            />
+            <FilterButton
+              color={eventColors["tech_talk"]} 
+              text="Tech Talk" 
+              isSelected={filter === "tech_talk"} 
+              onClick={() => filter === "tech_talk" ? setFilter(null) : setFilter("tech_talk")}
+            />
+          </FlexRow>
         </FlexRow>
       </div>
-      <Calendar curDay={curDay} />
+      <Calendar curDay={curDay} filter={filter} />
     </div>
   );
 }
