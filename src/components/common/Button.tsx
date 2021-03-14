@@ -5,13 +5,13 @@ interface Props {
     text: string
 }
 
-const Button: React.FC<Props> = (props) => {
+const Button: React.FC<Props & React.HTMLAttributes<HTMLButtonElement>> = (props) => {
     const {
         text
     } = props
 
     return (
-        <ButtonWrapper>
+        <ButtonWrapper {...props}>
             {text}
         </ButtonWrapper>
     )

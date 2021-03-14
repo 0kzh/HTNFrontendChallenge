@@ -43,3 +43,21 @@ export const formatTimestamp = (timeInMillis: number): string => {
 export const sameDate = (moment1: moment.Moment, moment2: moment.Moment): boolean => {
     return moment1.startOf('day').isSame(moment2.startOf('day'))
 }
+
+
+/*
+ * LOGIN FUNCTIONALITY
+ */
+export const doLogin = () => {
+    localStorage.setItem('logged_in', "thank mr goose")
+}
+
+export const doLogout = () => {
+    localStorage.removeItem('logged_in')
+}
+
+export const isLoggedIn = (): boolean => {
+    const fetchedData: string | null = localStorage.getItem('logged_in')
+    return !!fetchedData
+}
+

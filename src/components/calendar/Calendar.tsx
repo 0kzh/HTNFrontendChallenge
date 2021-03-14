@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { range, convert24HTo12H, timestampToCol, sameDate } from '../../util/helper'
+import { range, convert24HTo12H, timestampToCol, sameDate, isLoggedIn } from '../../util/helper'
 import eventData from "../../assets/data.json"
 import { TEvent, TEventType } from '../../util/types'
 import Event from './Event'
@@ -36,6 +36,7 @@ const Calendar: React.FC<Props> = (props) => {
 
     const renderEvents = () => 
         events
+        .filter((e: TEvent) => e.permission === "public" || isLoggedIn())
         .filter((e: TEvent) => !filter || e.event_type == filter)
         .filter((e: TEvent) => sameDate(curDay, moment(e.start_time)))
         .map((event: TEvent, i) =>
