@@ -1,28 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ChevronLeft, ChevronRight } from 'heroicons-react';
 
-import Calendar from './components/Calendar'
+import Calendar from './components/calendar/Calendar'
 import { FlexRow } from './components/common/FlexLayout'
 
 import './App.css'
+import moment from 'moment';
 
 const App: React.FC = () => {
+  const [curDay, setCurDay] = useState(moment(1610438400000))  
+
+  useEffect(() => {
+    console.log(curDay)
+  }, [curDay])
+
   return (
     <div className="App">
       <div>
         <h1>Event Calendar</h1>
         <FlexRow style={{ gap: 10, marginBottom: 30 }}>
-          <RoundButton>
+          <RoundButton onClick={() => setCurDay(curDay.clone().subtract(1, 'd'))}>
             <ChevronLeft/>
           </RoundButton>
-          <Date>Saturday, March 13</Date>
-          <RoundButton>
+          <Date>{curDay.format("dddd, MMM DD")}</Date>
+          <RoundButton onClick={() => setCurDay(curDay.clone().add(1, 'd'))}>
             <ChevronRight/>
           </RoundButton>
         </FlexRow>
       </div>
-      <Calendar />
+      <Calendar curDay={curDay} />
     </div>
   );
 }

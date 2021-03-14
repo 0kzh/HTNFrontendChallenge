@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { formatTimestamp } from '../util/helper'
-import { eventColors } from '../util/constants'
-import { TEvent } from '../util/types'
+import { formatTimestamp } from '../../util/helper'
+import { eventColors } from '../../util/constants'
+import { TEvent } from '../../util/types'
 
 interface EventProps {
     row: number;

@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { range, convert24HTo12H, timestampToCol, sameDate } from '../util/helper'
-import eventData from "../assets/data.json"
-import { TEvent } from '../util/types'
+import { range, convert24HTo12H, timestampToCol, sameDate } from '../../util/helper'
+import eventData from "../../assets/data.json"
+import { TEvent } from '../../util/types'
 import Event from './Event'
+import moment from 'moment';
 
-const moment = require('moment')
-
-interface Props {}
+interface Props {
+    curDay: moment.Moment
+}
 const startHour = 0
 const endHour = 23
 
@@ -15,10 +16,8 @@ const hours = range(startHour, endHour)
 
 const events: TEvent[] = eventData["data"]["events"] as TEvent[]
 
-const Calendar: React.FC = (props: Props) => {
-    const {} = props
-
-    const [curDay, setCurDay] = useState(moment(1610438400000))
+const Calendar: React.FC<Props> = (props) => {
+    const { curDay } = props
 
     const renderDividers = () => 
         hours.map((hour, i) => 
@@ -45,6 +44,7 @@ const Calendar: React.FC = (props: Props) => {
         )
 
     return (
+        curDay ?
         <div style={{ overflow: 'scroll', flex: 1 }}>
             <CalendarWrapper>
                 {renderDividers()}
@@ -52,6 +52,7 @@ const Calendar: React.FC = (props: Props) => {
                 {renderEvents()}
             </CalendarWrapper>
         </div>
+        : null
     )
 }
 
