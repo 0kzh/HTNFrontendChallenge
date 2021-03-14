@@ -6,7 +6,7 @@ interface Props {
 }
 
 const EventSelectorButton: React.FC<Props & React.HTMLAttributes<HTMLDivElement>> = (props) => {
-    const { isSelected, onClick, children } = props
+    const { children } = props
 
     return (
         <RoundButton {...props}>

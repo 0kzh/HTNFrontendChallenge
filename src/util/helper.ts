@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import moment from 'moment-timezone'
 import { TEvent, TEventCategory } from './types'
 import { eventDates } from './constants'
@@ -43,7 +43,7 @@ export const getTimezone = (): string => {
  */ 
 export const timestampToCol = (timeInMillis: number): number => {
     const date: moment.Moment = moment(timeInMillis)
-    return date.hour() * 2 + (date.minute() == 30 ? 1 : 0) + 1
+    return date.hour() * 2 + (date.minute() === 30 ? 1 : 0) + 1
 }
 
 export const formatTimestamp = (timeInMillis: number): string => {
@@ -146,7 +146,7 @@ export const processOverlaps = (events: TEvent[]): TEvent[] => {
     }
 
     events.forEach(event => {
-        if (heap.size() == 0) {
+        if (heap.size() === 0) {
             add(event)            
             return
         }

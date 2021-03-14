@@ -8,7 +8,7 @@ interface Props {
 }
 
 const FilterButton: React.FC<Props & React.HTMLAttributes<HTMLDivElement>> = (props) => {
-    const { color, text, isSelected, onClick } = props
+    const { color, text } = props
 
     return (
         <RoundButton {...props}>

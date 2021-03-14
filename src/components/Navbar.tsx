@@ -7,10 +7,8 @@ import Button from './common/Button'
 import logo from '../assets/images/logo.svg'
 import { doLogin, doLogout, isLoggedIn } from '../util/helper'
 
-interface Props {}
 
-const Navbar: React.FC<Props & React.HTMLAttributes<HTMLDivElement>> = (props) => {
-    const {} = props
+const Navbar: React.FC<React.HTMLAttributes<HTMLDivElement>> = (props) => {
 
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
@@ -31,7 +29,7 @@ const Navbar: React.FC<Props & React.HTMLAttributes<HTMLDivElement>> = (props) =
 
     return (
         <FlexRow {...props}>
-            <a href="#"><Logo src={logo} /></a>
+            <a href="/"><Logo src={logo} /></a>
             <Button
                 text={loggedIn ? "Log out" : "Log in"}
                 onClick={loggedIn ? logOut : logIn}

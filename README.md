@@ -1,5 +1,7 @@
 # Hack the North Frontend Challenge
 
+Try it out here: https://htn.kelvinzhang.ca
+
 ## Installation
 To get running with the repository, run
 ```bash
@@ -59,7 +61,7 @@ Finally, the last issue was continuity. I noticed that some events were from Jan
 I'm not sure if we were supposed to build an entire login screen, but I already spent a lot of time on displaying the events so I decided to keep this simple. It's just a button that updates LocalStorage. 
 
 ### Event Links
-Since this is the only page, I thought React Router would be overkill. JavaScript has a [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) interface which I used instead. I just read the URL on load and display the appropriate event if `event` is set.
+Since this is the only page, I thought React Router would be overkill. JavaScript has a [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) interface which I used instead. I just [read the URL on load](https://github.com/0kzh/HTNFrontendChallenge/blob/3b5aa9d80ace2faa1377a8d1d2c944232640137a/src/components/calendar/Calendar.tsx#L38) and display the appropriate event if `event` is set.
 
 ### Accessibility
 The app is compatible in every timezone 🎉
@@ -67,7 +69,6 @@ The app is compatible in every timezone 🎉
 One thing I'm proud of is making this app to be fully responsive and easy to use on mobile. The event filters are grouped under [a component](https://github.com/0kzh/HTNFrontendChallenge/blob/master/src/components/common/DynamicFlexLayout.tsx) that changes its layout depending on the user's device. Modals and everything else play nicely too.
 
 I was also building this on my laptop and came to realize that horizontal scrolling would be a problem with a mouse, so I made the horizontal scrollbar permanently visible.
-
 
 ## Improvements
 - Making the entire calendar to be draggable by mouse.

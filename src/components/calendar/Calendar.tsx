@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { request, gql } from 'graphql-request'
+import { request } from 'graphql-request'
 import styled from 'styled-components'
 import { range, convert24HTo12H, timestampToCol, sameDate, isLoggedIn, processOverlaps, isNormalInteger, getEventIdFromUrl } from '../../util/helper'
 import { TEvent, TEventType } from '../../util/types'
@@ -38,7 +38,7 @@ const Calendar: React.FC<Props> = (props) => {
     useEffect(() => {
         const eventId: string | null = getEventIdFromUrl()
         if (eventId && isNormalInteger(eventId)) {
-            const eventData = events.filter((e: TEvent) => e.id == Number(eventId))
+            const eventData = events.filter((e: TEvent) => e.id === Number(eventId))
             if (eventData) {
                 const event = eventData[0]
                 setSelectedEvent(event)
@@ -48,12 +48,12 @@ const Calendar: React.FC<Props> = (props) => {
 
     const renderDividers = () => 
         hours.map((hour, i) => 
-            <Divider column={i + 1}/>
+            <Divider key={"div_" + i} column={i + 1}/>
         )
 
     const renderHeadings = () => 
         hours.map((hour, i) => 
-            <Heading column={i + 1}>
+            <Heading key={"hour_" + i} column={i + 1}>
                 <div style={{ transform: 'translate(-25%, 0)'}}>{
                     hour === 0 ? '' : convert24HTo12H(hour)
                 }</div>
@@ -63,10 +63,11 @@ const Calendar: React.FC<Props> = (props) => {
     const renderEvents = () => 
         events
         .filter((e: TEvent) => e.permission === "public" || isLoggedIn())
-        .filter((e: TEvent) => !filter || e.event_type == filter)
+        .filter((e: TEvent) => !filter || e.event_type === filter)
         .filter((e: TEvent) => sameDate(curDay, moment(e.start_time)))
         .map((event: TEvent, i) =>
-            <Event 
+            <Event
+                key={event.id}
                 column={timestampToCol(event.start_time)}
                 span={timestampToCol(event.end_time) - timestampToCol(event.start_time)}
                 row={event.row + 1}
