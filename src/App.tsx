@@ -16,7 +16,7 @@ import moment from 'moment';
 import DynamicFlexLayout from './components/common/DynamicFlexLayout';
 
 const App: React.FC = () => {
-  const [curDay, setCurDay] = useState(moment(1610438400000))
+  const [curDay, setCurDay] = useState(moment(eventDates['gear_up'].start_time))
   const [filter, setFilter] = useState<TEventType | null>(null)
   const [activeTab, setActiveTab] = useState<TEventCategory>("gear_up")
 

@@ -82,8 +82,19 @@ export const isLoggedIn = (): boolean => {
 }
 
 /*
- * Miscellaneous
+ * ROUTING
  */
+export const getEventIdFromUrl = (): string | null => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const eventId = urlParams.get('event')
+    return eventId
+}
+
+/*
+ * MISCELLANEOUS
+ */
+// from https://stackoverflow.com/a/64218472/5538168
 export const useCheckMobileScreen = (): boolean => {
     const [width, setWidth] = useState(window.innerWidth);
     const handleWindowSizeChange = () => {
@@ -98,4 +109,14 @@ export const useCheckMobileScreen = (): boolean => {
     }, []);
 
     return (width <= 768);
+}
+
+// from https://stackoverflow.com/a/10834843/5538168
+export const isNormalInteger = (str: string): boolean => {
+    var n = Math.floor(Number(str));
+    return n !== Infinity && String(n) === str && n >= 0;
+}
+
+export const copyToClipboard = (str: string) => {
+    navigator.clipboard.writeText(str)
 }

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { range, convert24HTo12H, timestampToCol, sameDate, isLoggedIn } from '../../util/helper'
+import { range, convert24HTo12H, timestampToCol, sameDate, isLoggedIn, getEventIdFromUrl, isNormalInteger } from '../../util/helper'
 import eventData from "../../assets/data.json"
 import { TEvent, TEventType } from '../../util/types'
 import Event from './Event'
@@ -21,6 +21,18 @@ const Calendar: React.FC<Props> = (props) => {
     const { curDay, filter } = props
 
     const [selectedEvent, setSelectedEvent] = useState<TEvent>()
+
+    // determine our route on initial load
+    useEffect(() => {
+        const eventId: string | null = getEventIdFromUrl()
+        if (eventId && isNormalInteger(eventId)) {
+            const eventData = events.filter((e: TEvent) => e.id == Number(eventId))
+            if (eventData) {
+                const event = eventData[0]
+                setSelectedEvent(event)
+            }
+        }
+    }, [])
 
     const renderDividers = () => 
         hours.map((hour, i) => 

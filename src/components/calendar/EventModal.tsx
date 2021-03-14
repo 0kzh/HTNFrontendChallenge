@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { TEvent } from '../../util/types'
-import { formatTimestamp, getDate } from '../../util/helper'
+import { formatTimestamp, getDate, copyToClipboard } from '../../util/helper'
 import { CalendarOutline, ClockOutline, X } from 'heroicons-react'
 import { FlexRow } from '../common/FlexLayout'
 import Button from '../common/Button'
@@ -13,6 +13,13 @@ interface Props {
 
 const EventModal: React.FC<Props> = (props) => {
     const { eventData, closeModalHandler } = props
+
+    const copyEventLink = (event: TEvent) => {
+        copyToClipboard(`${window.location.origin}?event=${event.id}`)
+        setTimeout(() =>
+            alert("Copied to clipboard")
+        , 100)
+    }
 
     return (
         eventData ?
@@ -32,7 +39,10 @@ const EventModal: React.FC<Props> = (props) => {
                 <Description>
                     {eventData.description}
                 </Description>
-                <Button text="Add to Calendar" onClick={() => alert("This doesn't actually do anything 💩")}/>
+                <FlexRow style={{ gap: 5 }}>
+                    <Button text="Add to Calendar" onClick={() => alert("This doesn't actually do anything 💩")}/>
+                    <Button text="Copy Event Link" onClick={() => copyEventLink(eventData)}/>
+                </FlexRow>
             </Modal>
         </div>
         : null
