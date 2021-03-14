@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import moment from 'moment'
+import moment from 'moment-timezone'
 import { TEvent, TEventCategory } from './types'
 import { eventDates } from './constants'
 
@@ -25,6 +25,12 @@ export const convert24HTo12H = (timeIn24H: number): string => {
     }
 
     return `${hour}:${isHalfHour ? "30" : "00"} ${isPM ? "PM" : "AM"}`
+}
+
+export const getTimezone = (): string => {
+    const guess = moment.tz.guess(true);
+    
+    return moment().tz(guess).zoneAbbr()
 }
 
 /*

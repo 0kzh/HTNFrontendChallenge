@@ -8,7 +8,7 @@ import EventSelectorButton from './components/calendar/EventSelectorButton'
 import Navbar from './components/Navbar'
 import { FlexRow } from './components/common/FlexLayout'
 import { eventColors, eventDates } from './util/constants'
-import { hasPrevDay, hasNextDay } from './util/helper'
+import { hasPrevDay, hasNextDay, getTimezone, useCheckMobileScreen } from './util/helper'
 import { TEventType, TEventCategory } from './util/types'
 
 import './App.css'
@@ -83,6 +83,7 @@ const App: React.FC = () => {
             >
               <ChevronRight/>
             </RoundButton>
+            <Timezone>{`${useCheckMobileScreen() ? "" : "Times are displayed in"} ${getTimezone()}`}</Timezone>
           </FlexRow>
           <DynamicFlexLayout>
             <FilterButton
@@ -120,6 +121,10 @@ const Title = styled.h1`
 const Date = styled.div`
   color: #111827;
   font-weight: 600;
+`
+
+const Timezone = styled.div`
+  color: #636366;
 `
 
 const RoundButton = styled.div`
