@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import { request, gql } from 'graphql-request'
 import styled from 'styled-components'
-import { range, convert24HTo12H, timestampToCol, sameDate, isLoggedIn, getEventIdFromUrl, isNormalInteger } from '../../util/helper'
-import eventData from "../../assets/data.json"
+import { range, convert24HTo12H, timestampToCol, sameDate, isLoggedIn, processOverlaps, isNormalInteger, getEventIdFromUrl } from '../../util/helper'
 import { TEvent, TEventType } from '../../util/types'
 import Event from './Event'
 import EventModal from './EventModal'
 import moment from 'moment';
+
+import { API_ENDPOINT } from '../../util/constants'
+import { getEvents } from '../../graphql/query'
+
 interface Props {
     curDay: moment.Moment
     filter: TEventType | null
@@ -15,14 +19,22 @@ const endHour = 23
 
 const hours = range(startHour, endHour)
 
-const events: TEvent[] = eventData["data"]["events"] as TEvent[]
-
 const Calendar: React.FC<Props> = (props) => {
     const { curDay, filter } = props
 
+    const [events, setEvents] = useState<TEvent[]>([])
     const [selectedEvent, setSelectedEvent] = useState<TEvent>()
 
-    // determine our route on initial load
+    useEffect(() => {
+        (async () => {
+            const data = await request(API_ENDPOINT, getEvents)
+            if (data && data.events) {
+                setEvents(processOverlaps(data.events))
+            }
+        })()
+    }, [])
+    
+    // determine if event was specified in url
     useEffect(() => {
         const eventId: string | null = getEventIdFromUrl()
         if (eventId && isNormalInteger(eventId)) {
@@ -32,7 +44,7 @@ const Calendar: React.FC<Props> = (props) => {
                 setSelectedEvent(event)
             }
         }
-    }, [])
+    }, [events])
 
     const renderDividers = () => 
         hours.map((hour, i) => 

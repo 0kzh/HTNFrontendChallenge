@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import moment from 'moment'
-import { TEventCategory } from './types'
+import { TEvent, TEventCategory } from './types'
 import { eventDates } from './constants'
+
+import Heap from 'heap'
 
 export const range= (begin: number, end: number): Array<number> => {
     let len = end - begin + 1;
@@ -64,7 +66,6 @@ export const hasNextDay = (eventCategory: TEventCategory, day: moment.Moment): b
     return !lastDay.isSame(day.startOf('day'))
 }
 
-
 /*
  * LOGIN FUNCTIONALITY
  */
@@ -119,4 +120,41 @@ export const isNormalInteger = (str: string): boolean => {
 
 export const copyToClipboard = (str: string) => {
     navigator.clipboard.writeText(str)
+}
+
+/*
+ * Some events might overlap. 
+ * This modifies `events` to add a `row` attribute so that
+   overlapping events are displayed on separate lines
+ */
+export const processOverlaps = (events: TEvent[]): TEvent[] => {
+    let heap = new Heap<number>()
+    let newEvents: Array<TEvent> = []
+
+    events.sort((a: TEvent, b: TEvent) => a.start_time - b.start_time)
+
+    const add = (event: TEvent) => {
+        event.row = heap.size() + 1
+        newEvents.push(event)
+        heap.push(event.end_time)
+    }
+
+    events.forEach(event => {
+        if (heap.size() == 0) {
+            add(event)            
+            return
+        }
+
+        if (event.start_time < heap.peek()) {
+            add(event)            
+        } else{
+            // pop all events with an earlier end date
+            while (heap.size() > 0 && heap.top() < event.start_time) {
+                heap.pop()
+            }
+            add(event)
+        }
+    })
+
+    return newEvents
 }

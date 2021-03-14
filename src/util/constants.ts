@@ -1,3 +1,5 @@
+export const API_ENDPOINT = "https://api.hackthenorth.com/v3/graphql"
+
 export const eventDates = {
     "gear_up": {
         "start_time": 1610438400000,
