@@ -13,6 +13,7 @@ import { TEventType, TEventCategory } from './util/types'
 
 import './App.css'
 import moment from 'moment';
+import DynamicFlexLayout from './components/common/DynamicFlexLayout';
 
 const App: React.FC = () => {
   const [curDay, setCurDay] = useState(moment(1610438400000))
@@ -83,7 +84,7 @@ const App: React.FC = () => {
               <ChevronRight/>
             </RoundButton>
           </FlexRow>
-          <FlexRow>
+          <DynamicFlexLayout>
             <FilterButton
               color={eventColors["workshop"]} 
               text="Workshop" 
@@ -102,7 +103,7 @@ const App: React.FC = () => {
               isSelected={filter === "tech_talk"} 
               onClick={() => filter === "tech_talk" ? setFilter(null) : setFilter("tech_talk")}
             />
-          </FlexRow>
+          </DynamicFlexLayout>
         </FlexRow>
       </div>
       <Calendar curDay={curDay} filter={filter} />

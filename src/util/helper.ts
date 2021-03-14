@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import moment from 'moment'
 import { TEventCategory } from './types'
 import { eventDates } from './constants'
@@ -80,3 +81,21 @@ export const isLoggedIn = (): boolean => {
     return !!fetchedData
 }
 
+/*
+ * Miscellaneous
+ */
+export const useCheckMobileScreen = (): boolean => {
+    const [width, setWidth] = useState(window.innerWidth);
+    const handleWindowSizeChange = () => {
+            setWidth(window.innerWidth);
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
+    }, []);
+
+    return (width <= 768);
+}

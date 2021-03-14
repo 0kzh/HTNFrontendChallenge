@@ -6,6 +6,12 @@ export const FlexRow = styled.div`
     align-items: center;
 `
 
+export const FlexColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`
+
 export const FlexCentered = styled.div`
     justify-content: center;
     align-items: center;

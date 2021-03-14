@@ -29,6 +29,8 @@ const RoundButton = styled.div`
     align-items: center;
     justify-content: center;
     margin-right: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
     
     &:hover{
         background: #CEEEFC;
