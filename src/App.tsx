@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ChevronLeft, ChevronRight } from 'heroicons-react';
 
 import Calendar from './components/calendar/Calendar'
 import FilterButton from './components/calendar/FilterButton'
+import Navbar from './components/Navbar'
 import { FlexRow  } from './components/common/FlexLayout'
 import { eventColors } from './util/constants'
 import { TEventType } from './util/types'
@@ -15,14 +16,11 @@ const App: React.FC = () => {
   const [curDay, setCurDay] = useState(moment(1610438400000))
   const [filter, setFilter] = useState<TEventType | null>(null)
 
-  useEffect(() => {
-    console.log(filter)
-  }, [filter])
-
   return (
     <div className="App">
-      <div>
-        <h1>Event Calendar</h1>
+      <div className="container">
+        <Navbar style={{marginBottom: 50, justifyContent: 'space-between' }} />
+        <Title>Event Calendar</Title>
         <FlexRow style={{ justifyContent: 'space-between', marginBottom: 30 }}>
           <FlexRow style={{ gap: 10 }}>
             <RoundButton onClick={() => setCurDay(curDay.clone().subtract(1, 'd'))}>
@@ -59,6 +57,12 @@ const App: React.FC = () => {
     </div>
   );
 }
+
+const Title = styled.h1`
+  color: #111827;
+  font-size: 28px; 
+  margin-left: 5px;
+`
 
 const Date = styled.div`
   color: #111827;

@@ -249,6 +249,70 @@
                     15
                 ],
                 "row": 1
+            },
+            {
+                "id": 12,
+                "name": "Black in Tech Meet-Up",
+                "event_type": "activity",
+                "permission": "private",
+                "start_time": 1638343800000,
+                "end_time": 1638351000000,
+                "description": "Our Black in Tech Meet-Up 💛 is happening in Meet-Up Room 3! Join us for games, good vibes, great conversation, and tea spilling. 🥥",
+                "speakers": [],
+                "public_url": "",
+                "private_url": "https://hopin.com/events/hack-the-north-2020",
+                "related_events": [
+                    13,
+                    14
+                ],
+                "row": 1
+            },
+            {
+                "id": 13,
+                "name": "LGBTQ+ Hackers Meet-Up",
+                "event_type": "activity",
+                "permission": "private",
+                "start_time": 1638390600000,
+                "end_time": 1638394200000,
+                "description": "Our LGBTQ+ Hackers Meet-Up 🏳️‍🌈 is taking place in Meet-Up Room 3! Anyone from the LGBTQ+ community along with any allies are welcome 🤗",
+                "speakers": [],
+                "public_url": "",
+                "private_url": "https://hopin.com/events/hack-the-north-2020",
+                "related_events": [
+                    12,
+                    14
+                ],
+                "row": 1
+            },
+            {
+                "id": 14,
+                "name": "Ladies Storm Hackathons Meet-Up",
+                "event_type": "activity",
+                "permission": "private",
+                "start_time": 1638392400000,
+                "end_time": 1638396000000,
+                "description": "Take a break from hacking and drop into our Ladies Storm Hackathons Meet-Up 👩‍💻 in Meet-Up Room 3! Open to all women, non-binary people, trans women, and allies ✨",
+                "speakers": [],
+                "public_url": "",
+                "private_url": "https://hopin.com/events/hack-the-north-2020",
+                "related_events": [],
+                "row": 2
+            },
+            {
+                "id": 15,
+                "name": "High School Hackers Meet-Up",
+                "event_type": "activity",
+                "permission": "private",
+                "start_time": 1638406800000,
+                "end_time": 1638410400000,
+                "description": "Calling all high schoolers, our High School Hackers Meet-Up 📚 is happening on Discord in Meet-Up Room 1!",
+                "speakers": [],
+                "public_url": "",
+                "private_url": "https://hopin.com/events/hack-the-north-2020",
+                "related_events": [
+                    11
+                ],
+                "row": 1
             }
         ]
     }
