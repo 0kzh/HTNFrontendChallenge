@@ -66,12 +66,14 @@ const CalendarWrapper = styled.div`
 `
 
 const Divider = styled.span`
-    border-left: 1px solid lightgrey;
+    border-left: 1px solid #F2F2F7;
     grid-row: 2 / span 100;
     grid-column: ${(props: { column: number} ) => props.column};
 `
 
 const Heading = styled.span`
+    font-size: 12px;
+    color: #ADAEB2;
     grid-column: ${(props: { column: number} ) => props.column};
     grid-row: 1;
 `
