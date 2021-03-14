@@ -1,11 +1,11 @@
-export const eventTimelines = {
-    "gear-up": {
+export const eventDates = {
+    "gear_up": {
         "start_time": 1610438400000,
-        "end_time": 1610611199
+        "end_time": 1610524800000
     },
     "htn": {
-        "start_time": 1638259200,
-        "end_time": 1638431999
+        "start_time": 1638259200000,
+        "end_time": 1638345600000
     }
 }
 

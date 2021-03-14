@@ -1,4 +1,6 @@
 import moment from 'moment'
+import { TEventCategory } from './types'
+import { eventDates } from './constants'
 
 export const range= (begin: number, end: number): Array<number> => {
     let len = end - begin + 1;
@@ -47,6 +49,18 @@ export const getDate = (timeInMillis: number): string => {
 
 export const sameDate = (moment1: moment.Moment, moment2: moment.Moment): boolean => {
     return moment1.startOf('day').isSame(moment2.startOf('day'))
+}
+
+export const hasPrevDay = (eventCategory: TEventCategory, day: moment.Moment): boolean => {
+    const dates = eventDates[eventCategory]
+    const firstDay: moment.Moment = moment(dates.start_time).startOf('day')
+    return !firstDay.isSame(day.startOf('day'))
+}
+
+export const hasNextDay = (eventCategory: TEventCategory, day: moment.Moment): boolean => {
+    const dates = eventDates[eventCategory]
+    const lastDay: moment.Moment = moment(dates.end_time).startOf('day')
+    return !lastDay.isSame(day.startOf('day'))
 }
 
 

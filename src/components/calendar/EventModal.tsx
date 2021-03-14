@@ -76,6 +76,7 @@ const Title = styled.h1`
 
 const Description = styled.p`
     color: #636366;
+    margin-bottom: 2em;
 `
 
 const Date = styled.div`

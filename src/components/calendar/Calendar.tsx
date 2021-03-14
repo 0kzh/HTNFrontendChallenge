@@ -20,7 +20,6 @@ const events: TEvent[] = eventData["data"]["events"] as TEvent[]
 const Calendar: React.FC<Props> = (props) => {
     const { curDay, filter } = props
 
-    const [modalIsOpen, setModalIsOpen] = useState<boolean>(true)
     const [selectedEvent, setSelectedEvent] = useState<TEvent>()
 
     const renderDividers = () => 

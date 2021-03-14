@@ -1,4 +1,5 @@
 export type TEventType = "workshop" | "activity" | "tech_talk";
+export type TEventCategory = "gear_up" | "htn"
 export type TPermission = "public" | "private";
 
 export type TSpeaker = {
