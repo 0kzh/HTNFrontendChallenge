@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ChevronLeft, ChevronRight } from 'heroicons-react';
 
@@ -16,6 +16,28 @@ const App: React.FC = () => {
   const [curDay, setCurDay] = useState(moment(1610438400000))
   const [filter, setFilter] = useState<TEventType | null>(null)
 
+  // Persist and fetch the last day we're on
+  useEffect(() => {
+    const fetchedData: string | null = localStorage.getItem('curday')
+    if (!fetchedData) {
+      return
+    }
+
+    setCurDay(moment(JSON.parse(fetchedData)))
+  }, [])
+
+  const prevDay = () => {
+    const newDay = curDay.clone().subtract(1, 'd')
+    setCurDay(newDay)
+    localStorage.setItem('curday', JSON.stringify(newDay.valueOf()))
+  }
+
+  const nextDay = () => {
+    const newDay = curDay.clone().add(1, 'd')
+    setCurDay(curDay.clone().add(1, 'd'))
+    localStorage.setItem('curday', JSON.stringify(newDay.valueOf()))
+  }
+
   return (
     <div className="App">
       <div className="container">
@@ -23,11 +45,11 @@ const App: React.FC = () => {
         <Title>Event Calendar</Title>
         <FlexRow style={{ justifyContent: 'space-between', marginBottom: 30 }}>
           <FlexRow style={{ gap: 10 }}>
-            <RoundButton onClick={() => setCurDay(curDay.clone().subtract(1, 'd'))}>
+            <RoundButton onClick={prevDay}>
               <ChevronLeft/>
             </RoundButton>
             <Date>{curDay.format("dddd, MMM DD")}</Date>
-            <RoundButton onClick={() => setCurDay(curDay.clone().add(1, 'd'))}>
+            <RoundButton onClick={nextDay}>
               <ChevronRight/>
             </RoundButton>
           </FlexRow>
