@@ -12,9 +12,9 @@ interface Props {}
 const DynamicFlexLayout: React.FC<Props & React.HTMLAttributes<HTMLDivElement>> = (props) => {
     return (
         useCheckMobileScreen() ?
-        <FlexColumn>{props.children}</FlexColumn>        
+        <FlexColumn {...props}>{props.children}</FlexColumn>        
         :
-        <FlexRow>{props.children}</FlexRow>        
+        <FlexRow {...props}>{props.children}</FlexRow>        
     )
 }
 

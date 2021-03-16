@@ -86,7 +86,7 @@ const Calendar: React.FC<Props> = (props) => {
                 {renderHeadings()}
                 {renderEvents()}
             </CalendarWrapper>
-            <EventModal eventData={selectedEvent} closeModalHandler={closeModal} />
+            <EventModal allEvents={events} eventData={selectedEvent} closeModalHandler={closeModal} />
         </div>
         : null
     )

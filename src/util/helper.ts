@@ -164,3 +164,11 @@ export const processOverlaps = (events: TEvent[]): TEvent[] => {
 
     return newEvents
 }
+
+export const openInNewTab = (url: string) => {
+    window.open(url, "_blank")
+}
+
+export const generateEventLink = (id: number): string => {
+    return `${window.location.origin}?event=${id}`
+}

@@ -30,6 +30,7 @@ These are the dependencies I used:
 - Heroicons
 - Styled Components
 - moment.js
+- React Tooltip
 
 I decided to use graphql-request because it's more lightweight than Apollo and gets the job done.
 
@@ -39,6 +40,7 @@ Styled Components is something I always use because it prevents the main compone
 
 Moment.js is used for timezone conversions and date calculations.
 
+React Tooltip was used for showing speaker name when hovering on their profile pictures.
 ### Displaying Events
 Initially I was considering a couple of options to display the event data.
 
@@ -70,12 +72,15 @@ One thing I'm proud of is making this app to be fully responsive and easy to use
 
 I was also building this on my laptop and came to realize that horizontal scrolling would be a problem with a mouse, so I made the horizontal scrollbar permanently visible.
 
+### Deployment
+The site is deployed on AWS Amplify. CI/CD is set up to track the repository so that new pushes trigger a re-deploy.
+
 ## Improvements
 - Making the entire calendar to be draggable by mouse.
 - Having an sweeping line indicator on the calendar showing current time. It would also be nice to automatically scroll to the current time, instead of defaulting to midnight.
+- If there are multiple speakers, having their avatars overlap like shown [here](https://codepen.io/fmoliveira/pen/XyZzXx)
 - Centralizing colors inside a separate file
 - Having a "view" toggle that allows users to switch between list, calendar, and timeline view
 - Downloading .ics files for calendar invites for each event
 - Allow scrolling between multiple dates (ex. between January 12/13)
-- Adding speaker profiles to the modal popup
 - Caching API responses so if it goes down there's still data
