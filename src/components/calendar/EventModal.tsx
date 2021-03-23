@@ -79,9 +79,13 @@ const EventModal: React.FC<Props> = (props) => {
                     <Subheading>Related Events</Subheading>
                     <FlexRow style={{ gap: 10}}>
                         {
-                            eventData.related_events.map(targetEventId => {
+                            eventData.related_events
+                            .filter((eid: number) => {
+                                const event = allEvents.find((event: TEvent) => event.id == eid)
+                                return event && (event.permission === "public" || isLoggedIn())
+                            })
+                            .map(targetEventId => {
                                 const event = allEvents.find((event: TEvent) => event.id == targetEventId)
-                                console.log(event)
                                 if (event) {
                                     return <Event href={generateEventLink(event.id)}>{event.name}</Event>
                                 }
