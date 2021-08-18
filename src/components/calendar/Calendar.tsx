@@ -6,6 +6,7 @@ import { TEvent, TEventType } from '../../util/types'
 import Event from './Event'
 import EventModal from './EventModal'
 import moment from 'moment';
+import {data} from "../../assets/data.json";
 
 import { API_ENDPOINT } from '../../util/constants'
 import { getEvents } from '../../graphql/query'
@@ -26,13 +27,13 @@ const Calendar: React.FC<Props> = (props) => {
     const [selectedEvent, setSelectedEvent] = useState<TEvent>()
 
     useEffect(() => {
-        (async () => {
-            const data = await request(API_ENDPOINT, getEvents)
-            if (data && data.events) {
-                setEvents(processOverlaps(data.events))
-            }
-        })()
-    }, [])
+        // (async () => {
+        //     const data = await request(API_ENDPOINT, getEvents)
+        if (data && data.events) {
+            setEvents(processOverlaps(data.events as any))
+        }
+        // })()
+    }, [data])
     
     // determine if event was specified in url
     useEffect(() => {
